@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar.jsx';
-import Home from './components/Home';
+import Home from './components/Home.jsx';
 import PatientSignUp from './components/PatientSignUp.jsx';
 import ProfessionalSignUp from './components/ProfessionalSignUp.jsx';
 import Login from './components/Login.jsx';
