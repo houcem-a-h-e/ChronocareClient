@@ -31,5 +31,20 @@
   "nurse": "ممرض",
   "technician": "فني",
   "registrationError": "خطأ في التسجيل",
-  "profile":"ملف شخصي"
+  "profile":"ملف شخصي",
+  "chatbotTitle": "المساعد الافتراضي",
+  "selectLanguage": "اختر اللغة",
+  "howAreYou": "كيف حالك؟",
+  "createAccount": "كيف يمكنني إنشاء حساب في ChronoCare؟",
+  "medicalHistory": "كيف أستطيع الاطلاع على تاريخي الطبي؟",
+  "prescriptions": "هل يمكنني تحميل الوصفات الطبية الخاصة بي؟",
+  "medicalFileAccess": "من يمكنه الوصول إلى ملفي الطبي؟",
+  "updateInfo": "كيف يمكنني تعديل بياناتي الشخصية؟",
+  "forgotPassword": "ماذا أفعل إذا نسيت كلمة المرور؟",
+  "addPrescription": "كيف يمكنني إضافة وصفة طبية جديدة؟",
+  "dataSecurity": "هل بياناتي الطبية آمنة؟",
+  "shareMedicalFile": "هل يمكنني مشاركة ملفي الطبي مع طبيب آخر؟",
+  "deleteAccount": "كيف يمكنني حذف حسابي نهائيًا؟",
+  "chooseQuestion": "اختر سؤالاً",
+  "chatError": "حدث خطأ في المحادثة"
 }

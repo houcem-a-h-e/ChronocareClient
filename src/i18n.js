@@ -12,7 +12,7 @@ i18n
   .init({
     resources: {
       fr: { translation: frTranslations },
-      ar: { translation: arTranslations }
+      ar: { translation: arTranslations },
     },
     fallbackLng: 'fr',
     interpolation: {

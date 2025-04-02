@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { FaCalendarAlt, FaPhoneAlt, FaUserCircle, FaUserMd } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 import { AuthContext } from "../Context/AuthContext";
+import Chatbot from "./Chatbot";
 export default function ProfessionalUI() {
     const {user } = useContext(AuthContext); 
   const { t } = useTranslation();
@@ -271,6 +272,7 @@ const handleSave = async () => {
           </div>
         )}
       </div>
+      <Chatbot />
     </div>
   );
 }

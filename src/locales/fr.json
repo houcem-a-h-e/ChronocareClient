@@ -31,5 +31,20 @@
   "nurse": "infirmier",
   "technician": "technicien",
   "registrationError": "erreur d'inscription",
-  "profile":"profile"
+  "profile":"profile",
+   "chatbotTitle": "Assistant Virtuel",
+  "selectLanguage": "Choisir la langue",
+  "howAreYou": "Comment ça va ?",
+  "createAccount": "Comment créer un compte ChronoCare ?",
+  "medicalHistory": "Comment accéder à mon historique médical ?",
+  "prescriptions": "Comment télécharger mes ordonnances ?",
+  "medicalFileAccess": "Qui peut accéder à mon dossier médical ?",
+  "updateInfo": "Comment modifier mes informations personnelles ?",
+  "forgotPassword": "Que faire si j'oublie mon mot de passe ?",
+  "addPrescription": "Comment ajouter une nouvelle ordonnance ?",
+  "dataSecurity": "Mes données médicales sont-elles sécurisées ?",
+  "shareMedicalFile": "Puis-je partager mon dossier avec un autre médecin ?",
+  "deleteAccount": "Comment supprimer définitivement mon compte ?",
+  "chooseQuestion": "Choisissez une question",
+  "chatError": "Erreur de discussion"
 }
