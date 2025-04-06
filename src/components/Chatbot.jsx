@@ -6,8 +6,7 @@ import { AuthContext } from '../Context/AuthContext';
 import { FaRobot, FaQuestion } from 'react-icons/fa6';
 
 const Chatbot = () => {
-  const { t: appT } = useTranslation(); // Global app translations
-  const [chatbotT, setChatbotT] = useState(appT); // Local chatbot translations
+  const { t, i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState(null);
   const [messages, setMessages] = useState([]);
