@@ -3,6 +3,7 @@ import { FaCalendarAlt, FaPhoneAlt, FaUserCircle, FaUserMd } from "react-icons/f
 import { useTranslation } from "react-i18next";
 import { AuthContext } from "../Context/AuthContext";
 import Chatbot from "./Chatbot";
+import apiRequest from "../Api/apiRequest";
 export default function ProfessionalUI() {
     const {user } = useContext(AuthContext); 
   const { t } = useTranslation();
@@ -39,26 +40,15 @@ const handleSave = async () => {
         formDataToSend.append(key, value);
       }
     });
-    const response = await fetch(`http://localhost:8800/api/users/${user.id}/profile`, {
-      method: "PATCH",
-      body: formDataToSend,
-      credentials: "include"
-    });
 
-    const contentType = response.headers.get("content-type");
-    let data;
-    
-    if (contentType?.includes("application/json")) {
-      data = await response.json();
-    } else {
-      const text = await response.text();
-      throw new Error(text || "Non-JSON response");
-    }
+    // Use apiRequest to send the PATCH request
+    const response = await apiRequest.patch(`/users/${user.id}/profile`, formDataToSend);
 
-    if (response.ok) {
+    // Check if response is okay
+    if (response.status === 200) {
       alert("Profile updated successfully!");
     } else {
-      throw new Error(data.message || "Update failed");
+      throw new Error(response.data.message || "Update failed");
     }
   } catch (err) {
     console.error("Update error:", err);
