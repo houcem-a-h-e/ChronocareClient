@@ -114,12 +114,11 @@ const handleSave = async () => {
   <h3 className="text-lg font-semibold mb-2">Photo de profile</h3>
 <div className="w-32 h-32 bg-gray-300 rounded-full flex items-center justify-center overflow-hidden">
   {(user.avatar || formData.profilePicture) ? (
-      <img 
+    <img 
       src={
         formData.profilePicture ? 
         URL.createObjectURL(formData.profilePicture) : 
-        // Use VITE_API_URL but omit /api for images
-        `${import.meta.env.VITE_API_URL.replace('/api', '')}${user.avatar}` 
+        `http://localhost:8800${user.avatar}`
       }
       alt="Profile" 
       className="w-full h-full object-cover"
