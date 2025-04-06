@@ -118,7 +118,7 @@ const handleSave = async () => {
       src={
         formData.profilePicture ? 
         URL.createObjectURL(formData.profilePicture) : 
-        `http://localhost:8800${user.avatar}`
+         `${import.meta.env.VITE_API_URL.replace('/api', '')}${user.avatar}`
       }
       alt="Profile" 
       className="w-full h-full object-cover"
