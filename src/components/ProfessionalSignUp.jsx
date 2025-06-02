@@ -5,19 +5,28 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { useTranslation } from 'react-i18next';
 
 function ProfessionalSignUp() {
+  let specId = '2'
   const [nom, setNom] = useState('');
+  const [cin, setCin] = useState('');
   const [prenom, setPrenom] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [dateDeNaissance, setDateDeNaissance] = useState(null);
-  const [numeroIdentificationProfessionnelle, setNumeroIdentificationProfessionnelle] = useState('');
+  const [numeroIdentificationProfessionnelle, setNumeroIdentificationProfessionnelle] = useState(specId);
   const [specialiteMedical, setSpecialiteMedical] = useState('');
   const [numeroDeTelephone, setNumeroDeTelephone] = useState('');
   const [type, setType] = useState('Doctor');
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
   const { t } = useTranslation();
-
+  
+  function formatDateToDDMMYYYY(date) {
+    if (!date) return '';
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}-${month}-${year}`;
+  }
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -26,10 +35,11 @@ function ProfessionalSignUp() {
         prenom,
         email,
         password,
-        dateDeNaissance: dateDeNaissance?.toISOString(),
+        dateDeNaissance: formatDateToDDMMYYYY(dateDeNaissance), // <-- use this!
         numeroIdentificationProfessionnelle,
         specialiteMedical,
         numeroDeTelephone,
+        cin,
         type,
       });
 
@@ -40,7 +50,7 @@ function ProfessionalSignUp() {
       setEmail('');
       setPassword('');
       setDateDeNaissance(null);
-      setNumeroIdentificationProfessionnelle('');
+      setNumeroIdentificationProfessionnelle(specId);
       setSpecialiteMedical('');
       setNumeroDeTelephone('');
       setType('Doctor');
@@ -50,7 +60,7 @@ function ProfessionalSignUp() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-start h-screen bg-gray-100">
+    <div className="flex flex-col items-center justify-start bg-gray-100">
       <h1 className="text-2xl font-bold mb-4 mt-8">{t('professionalSignUp')}</h1>
       <form onSubmit={handleSubmit} className="bg-white p-6 rounded shadow-md w-full max-w-sm">
         <input
@@ -99,12 +109,9 @@ function ProfessionalSignUp() {
           />
         </div>
         <input
-          type="text"
-          placeholder={t('professionalId')}
-          className="border p-2 mb-4 w-full"
+          type="hidden"
           value={numeroIdentificationProfessionnelle}
           onChange={(e) => setNumeroIdentificationProfessionnelle(e.target.value)}
-          required
         />
         <input
           type="text"
@@ -120,6 +127,14 @@ function ProfessionalSignUp() {
           className="border p-2 mb-4 w-full"
           value={numeroDeTelephone}
           onChange={(e) => setNumeroDeTelephone(e.target.value)}
+          required
+        />
+        <input
+          type="text"
+          placeholder={t('nationalCardID')}
+          className="border p-2 mb-4 w-full"
+          value={cin}
+          onChange={(e) => setCin(e.target.value)}
           required
         />
         <select

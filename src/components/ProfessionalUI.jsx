@@ -4,6 +4,8 @@ import { useTranslation } from "react-i18next";
 import { AuthContext } from "../Context/AuthContext";
 import Chatbot from "./Chatbot";
 import apiRequest from "../Api/apiRequest";
+import MedicalFolderProfessional from "./MedicalFolderProfessional";
+import RendezVous from "./RendezVous";
 export default function ProfessionalUI() {
     const {user } = useContext(AuthContext); 
   const { t } = useTranslation();
@@ -236,16 +238,10 @@ const handleSave = async () => {
     </div>
         )}
         {activeChoice === "medicalFiles" && (
-          <div>
-            <h1>Medical Files</h1>
-            <p>Manage medical files here.</p>
-          </div>
+          <MedicalFolderProfessional/>
         )}
         {activeChoice === "appointments" && (
-          <div>
-            <h1>Appointments</h1>
-            <p>Manage your appointments here.</p>
-          </div>
+          <RendezVous/>
         )}
         {activeChoice === "settings" && (
           <div>
@@ -262,7 +258,6 @@ const handleSave = async () => {
           </div>
         )}
       </div>
-      <Chatbot />
     </div>
   );
 }

@@ -11,6 +11,7 @@ import PatientUI from './components/PatientUI.jsx';
 import ProfessionalUI from './components/ProfessionalUI.jsx';
 import { AuthProvider } from './Context/AuthContext.jsx';
 import ProtectedRoute from './routes/ProtectedRoute.jsx';
+import Chatbot from './components/Chatbot.jsx';
 
 function App() {
     return (
@@ -55,6 +56,7 @@ function App() {
                                 }
                             />
                         </Routes>
+                        
                     </main>
 
                     <footer className="sticky bottom-0 z-10">

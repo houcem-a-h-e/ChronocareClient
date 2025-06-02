@@ -3,6 +3,7 @@ import { CiClock2 } from 'react-icons/ci';
 import { FaHandHoldingMedical, FaHeartPulse } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import Chatbot from './Chatbot';
 
 function Home() {
   const { t } = useTranslation();
@@ -38,6 +39,7 @@ function Home() {
         <CiClock2 className="h-8 w-8"/>
         <FaHandHoldingMedical className="h-8 w-8"/>
       </div>
+      <Chatbot/>
     </div>
   );
 }
