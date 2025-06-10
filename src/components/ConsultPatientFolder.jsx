@@ -2,14 +2,29 @@ import React, { useEffect, useState, useContext } from "react";
 import apiRequest from "../Api/apiRequest";
 import { useTranslation } from "react-i18next";
 import { AuthContext } from "../Context/AuthContext";
-
+import { toast } from "react-toastify";
 export default function ConsultPatientFolder() {
   const { t } = useTranslation();
   const { user } = useContext(AuthContext);
   const [dossiers, setDossiers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+  const [deletingId, setDeletingId] = useState(null)
+  const fetchDossiers = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const patientRes = await apiRequest.get(`/patients/${user.id}`);
+      const patientEmail = patientRes.data.email;
+      const dossiersRes = await apiRequest.get(`/dossiers/patient/${patientEmail}`);
+      setDossiers(dossiersRes.data);
+    } catch (err) {
+      console.error("Erreur récupération dossiers:", err);
+      setError(t("fetchError"));
+    } finally {
+      setLoading(false);
+    }
+  };
   useEffect(() => {
     if (!user || !user.id) {
       setError(t("userNotAuthenticated"));
@@ -40,6 +55,27 @@ export default function ConsultPatientFolder() {
   if (error) return <p className="text-center py-8 text-red-600 font-semibold">{error}</p>;
   if (dossiers.length === 0) return <p className="text-center py-8 text-gray-600">{t("noMedicalDossiers")}</p>;
 
+  const handleDeleteDossier = async (dossierId) => {
+    if (!window.confirm(t("confirmDeleteDossier"))) return;
+    
+    setDeletingId(dossierId);
+    try {
+      await apiRequest.delete(`/dossiers/${dossierId}`);
+      toast.success(t("dossierDeletedSuccess"));
+      // Refresh the list after deletion
+      await fetchDossiers();
+    } catch (err) {
+      console.error("Error deleting dossier:", err);
+      toast.error(t("dossierDeleteError"));
+    } finally {
+      setDeletingId(null);
+    }
+  };
+
+  if (loading) return <p className="text-center py-8 text-gray-500">{t("loading")}</p>;
+  if (error) return <p className="text-center py-8 text-red-600 font-semibold">{error}</p>;
+  if (dossiers.length === 0) return <p className="text-center py-8 text-gray-600">{t("noMedicalDossiers")}</p>;
+
   return (
     <div className="max-w-5xl mx-auto p-6 bg-white rounded-lg shadow-md text-gray-900">
       <h2 className="text-3xl font-bold mb-8 text-center">{t("patientMedicalDossiers")}</h2>
@@ -47,8 +83,16 @@ export default function ConsultPatientFolder() {
       {dossiers.map((dossier) => (
         <div
           key={dossier.id}
-          className="mb-8 border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow p-6"
+          className="mb-8 border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow p-6 relative"
         >
+          <button
+            onClick={() => handleDeleteDossier(dossier.id)}
+            disabled={deletingId === dossier.id}
+            className="absolute top-4 right-4 bg-red-100 hover:bg-red-200 text-red-800 px-3 py-1 rounded-md text-sm font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {deletingId === dossier.id ? t("deleting") : t("delete")}
+          </button>
+
           <h3 className="text-2xl font-semibold mb-4 border-b border-gray-300 pb-2">
             {dossier.fullName || t("untitledDossier")}
           </h3>
